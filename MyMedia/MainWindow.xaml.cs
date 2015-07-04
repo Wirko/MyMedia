@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TMDbClient;
 
 namespace MyMedia
 {
@@ -20,9 +21,18 @@ namespace MyMedia
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly TmDbClient _tmDbClient;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            _tmDbClient = new TmDbClient();
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            List<TmDbClient.Film> films = await _tmDbClient.GetFilmsByName("Blade");
         }
     }
 }
